@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab3.ReadingMapper">
+    <select id="selectAllReading" resultType="com.lab3.models.Reading">
+        SELECT * FROM "Reading"
+    </select>
+    <select id="selectByIdReading" parameterType="int" resultType="com.lab3.models.Reading">
+        SELECT * FROM "Reading" WHERE "ReadingID" = #{readingId}
+    </select>
+    <insert id="createReading" parameterType="com.lab3.models.Reading">
+        INSERT INTO "Reading" ("Reader", "Book", "Started", "Finished", "ReadPages") VALUES (#{reader}, #{book}, #{started}, #{finished}, #{readPages})
+    </insert>
+    <update id="updateReading" parameterType="com.lab3.models.Reading">
+        UPDATE "Reading" SET "Reader" = #{reader}, "Book" = #{book}, "Started" = #{started}, "Finished" = #{finished}, "ReadPages" = #{readPages} WHERE "ReadingID" = #{readingId}
+    </update>
+    <delete id="deleteReading" parameterType="int">
+        DELETE FROM "Reading" WHERE "ReadingID" = #{readingId}
+    </delete>
+</mapper>

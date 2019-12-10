@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab3.SearchMapper">
+    <select id="selectFrom2Tables" parameterType="com.lab3.models.SearchFrom2Tables" resultType="com.lab3.models.AuthorAndBook">
+        SELECT * FROM "Authors" INNER JOIN "Books" on "Authors"."AuthorID" = "Books"."BookAuthor" WHERE ("Pages" between #{from} and #{to} ) and "AuthorName" = '${name}'
+    </select>
+    <select id="noWordSearch" parameterType="String" resultType="com.lab3.models.Book">
+        SELECT * FROM "Books" WHERE NOT to_tsvector("BookName") @@ to_tsquery('${value}')
+    </select>
+    <select id="phraseSearch" parameterType="String" resultType="com.lab3.models.Book">
+        SELECT * FROM "Books" WHERE to_tsvector("BookName") @@ phraseto_tsquery('${value}')
+    </select>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab3.AuthorsMapper">
+    <select id="selectAllAuthors" resultType="com.lab3.models.Author">
+        SELECT * FROM "Authors"
+    </select>
+    <select id="selectByIdAuthor" parameterType="int" resultType="com.lab3.models.Author">
+        SELECT * FROM "Authors" WHERE "AuthorID" = #{authorId}
+    </select>
+    <insert id="createAuthor" parameterType="com.lab3.models.Author">
+        INSERT INTO "Authors" ("AuthorName", "DateOfBirth", "Biography") VALUES (#{authorName}, #{dateOfBirth}, #{biography})
+    </insert>
+    <update id="updateAuthor" parameterType="com.lab3.models.Author">
+        UPDATE "Authors" SET "AuthorName" = #{authorName}, "DateOfBirth" = #{dateOfBirth}, "Biography" = #{biography} WHERE "AuthorID" = #{authorId}
+    </update>
+    <delete id="deleteAuthor" parameterType="int">
+        DELETE FROM "Authors" WHERE "AuthorID" = #{authorId}
+    </delete>
+</mapper>
